@@ -1,0 +1,146 @@
+<odoo>
+    <data>
+        <!--tutor,pupils checkbox res.users-->
+        <record model="ir.ui.view" id="tutor_form_view">
+            <field name="name">tutor.form</field>
+            <field name="model">res.users</field>
+            <field name="inherit_id" ref="base.view_users_form"/>
+            <field name="arch" type="xml">
+                <field name="sel_groups_3_4" position="after">
+                    <field name="isTutor"/>
+                    <field name="isPupil"/>
+                </field>
+            </field>
+        </record> 
+
+        <!--fctpartner checkbox res.company-->
+        <record model="ir.ui.view" id="fctpartner_form_view">
+            <field name="name">partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="lang" position="after">
+                    <field name="isFCTPartner"/>
+                </field>
+            </field>
+        </record> 
+        <!-- for view of pupils-->
+        <record model="ir.ui.view" id="pupils_form_view">
+            <field name="name">pupils.form</field>
+            <field name="model">res.users</field>
+            <field name="arch" type="xml">
+                <form string="Pupil Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="company"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record> 
+        <!--form view of activities-->  
+        <record model="ir.ui.view" id="activity_form_view">
+            <field name="name">activity.form</field>
+            <field name="model">fctmanagement.activity</field>
+            <field name="arch" type="xml">
+                <form string="Activity Form">
+                    <sheet>
+                        <group>
+                            <field name="owner" invisible="1"/>
+                            <field name="date"/>
+                            <field name="duration"/>
+                            <field name="description"/>
+                            <field name="remarks"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record> 
+          <!--Personalized view Search description of PUPILS PER COMPANY  -->        
+        <record model="ir.ui.view" id="FCT_search_view">
+            <field name="name">fct.search</field>
+            <field name="model">res.users</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="company"/>
+                </search>
+            </field>
+        </record>   
+     <!--Personalized view Search description of activities per pupil  -->        
+        <record model="ir.ui.view" id="activity_search_view">
+            <field name="name">activity.search</field>
+            <field name="model">fctmanagement.activity</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="owner"/> 
+
+                </search>
+            </field>
+        </record>   
+        <!--Tree activities view-->
+        <record model="ir.ui.view" id="activity_tree_view">
+            <field name="name">activity.tree</field>
+            <field name="model">fctmanagement.activity</field>
+            <field name="arch" type="xml">
+                <tree string="Activity Tree">
+                            <field name="owner" invisible="1"/>
+                            <field name="date"/>
+                            <field name="duration"/>
+                            <field name="description"/>
+                </tree>
+            </field>
+        </record>
+        <!--Tree pupils view-->
+        <record model="ir.ui.view" id="pupils_tree_view">
+            <field name="name">pupil.tree</field>
+            <field name="model">res.users</field>
+            <field name="arch" type="xml">
+                <tree string="Activity Tree">
+                            <field name="name"/>
+                            <field name="login"/>
+                            <field name="company"/>
+                </tree>
+            </field>
+        </record>
+        <!--Action of activities-->
+        
+        <record model="ir.actions.act_window" id="fctmanagement_list_action" >
+            <field name="name">Activity</field>
+            <field name="res_model">fctmanagement.activity</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create the first activity
+                </p>           
+            </field>
+        </record>
+
+        <!--Action of pupils-->
+        <record model="ir.actions.act_window" id="fctmanagement_list_pupils" >
+            <field name="name">Pupil</field>
+            <field name="res_model">res.users</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">                  
+                </p>           
+            </field>
+        </record>
+        <!--menus-->
+        <menuitem id="main_fctmanagement_menu"
+            name="FCT management"/>
+        <menuitem id="fctmanagement_menu"
+            name="FCT management"
+            parent="main_fctmanagement_menu"/>
+        <menuitem id="activities_menu"
+            name="Activities"
+            parent="fctmanagement_menu"
+            action="fctmanagement_list_action"/>
+        <menuitem id="pupils_menu"
+            name="Pupils"
+            parent="fctmanagement_menu"
+            action="fctmanagement_list_pupils"/>
+    </data>
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<odoo>
+    <data>
+        <report
+            id="report_activities"
+            model="fctmanagement.activity"
+            string="Activity Report"
+            name="fctmanagement.report_activity_view"
+            file="openacademy.report_activity"
+            report_type="qweb-pdf"/>
+        <template id="report_session_view">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="report.external_layout">
+                        <div class="page">
+                            <h2 t-field="doc.name"/>
+                            <h3>Activities:</h3>
+                            <ul>
+
+                            </ul>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>
