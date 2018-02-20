@@ -5,7 +5,15 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
+<odoo> 
+    <data>      
+        <record id="group_pupils" model="res.groups">
+            <field name="name">pupils</field>
+        </record>
+        
+          <record id="group_tutors" model="res.groups">
+            <field name="name">tutors</field>
+        </record>
+    </data>
+</odoo>
 
-<root>
-    
-</root>

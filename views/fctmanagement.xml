@@ -34,6 +34,7 @@
                         <group>
                             <field name="name"/>
                             <field name="company"/>
+                            <field name="tutor" invisible="1"/>
                         </group>
                     </sheet>
                 </form>
@@ -56,7 +57,61 @@
                     </sheet>
                 </form>
             </field>
+        </record>
+        
+        
+
+      
+        <record id="only_responsible_can_modify" model="ir.rule">
+            <field name="name">Only Responsible can modify Course</field>
+            <field name="model_id" ref="model_fctmanagement_activity"/>
+            <field name="groups" eval="[(4, ref('fctmanagent.group_pupils'))]"/>
+            <field name="perm_read" eval="0"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="domain_force">['|', ('owner','=',False),('owner','=',user.id)]</field>
+        </record>
+
+
+<!--
+   <record model="ir.rule" id="activities_rule">
+        <field name="name">User is allowed to update his activities</field>
+        <field name="model_id" ref="model_fctmanagement_activity"/>
+
+        <field name="domain_force">[('owner','=',user.id)]</field>
+         <field name="perm_read" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+          </record>
+           --> 
+            <!--
         </record> 
+        
+            <record model="ir.rule" id="activities_rule">
+            <field name="name">User is allowed to update his activities</field>
+            <field name="model_id" ref="model_fctmanagement_activity"/>
+
+            <field name="domain_force">[('owner','=',user.id)]</field>
+             <field name="perm_read" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+        -->
+        
+        <!--
+            <record model="ir.rule" id="activities_rule">
+            <field name="name">User is allowed to update his activities</field>
+            <field name="model_id" ref="model_fctmanagement_activity"/>
+               <field name="groups" eval="(4,ref('base.grou_user'))"/>
+            <field name="domain_force">['|',('owner','=',user.id),[user.id,False]]</field>
+             <field name="perm_read" eval="False"/>
+            <field name="perm_create" eval="False"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        -->
           <!--Personalized view Search description of PUPILS PER COMPANY  -->        
         <record model="ir.ui.view" id="FCT_search_view">
             <field name="name">fct.search</field>
